@@ -1,0 +1,39 @@
+//FIFO
+#include<stdio.h>
+void main(){
+        int i,j,k=0,m,n,pf=0,temp;
+        printf("Enter the number of frames : ");
+        scanf("%d",&n);
+        printf("Enter the size of the input string : ");
+        scanf("%d",&m);
+        int a[m],frame[n];
+        for(i=0;i<n;i++){
+                frame[i]=-1;
+        }
+        printf("Enter the input string : ");
+        for(i=0;i<m;i++){
+                scanf("%d",&a[i]);
+        }
+        printf("The frames are : \n");
+        for(i=0;i<m;i++){
+                temp=0;
+                for(j=0;j<n;j++){
+                        if(frame[j]==a[i]){
+                                temp=1;
+                        }
+                }
+                if(temp==0){
+                        frame[k++]=a[i];
+                        k=k%n;
+                        pf++;
+                }
+                printf("\t\t");
+                for(j=0;j<n;j++){
+                        if(frame[j]!=-1){
+                                printf("%d  ",frame[j]);
+                        }
+                }
+                printf("\n");
+        }
+        printf("The page fault is : %d\n",pf);
+}
