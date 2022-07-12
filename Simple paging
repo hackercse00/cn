@@ -1,0 +1,23 @@
+#include<stdio.h>
+void main(){
+	int pm,lm,ps,n,la,offset,i,req,index;
+	printf("Enter the size of the physical memory :");
+	scanf("%d",&pm);
+	printf("Enter the size of the logical memory : ");
+	scanf("%d",&lm);
+	printf("Enter the page size :");
+	scanf("%d",&ps);
+	int pt[lm/ps];
+	n=pm/ps;
+	printf("Give index to the page table from 0 to %d:\n",n-1);
+	for(i=0;i<lm/ps;i++){
+		printf("pt[%d]:",i);
+		scanf("%d",&pt[i]);
+	}
+	printf("Enter the logical memory address to find the physical address : ");
+	scanf("%d",&la);
+	offset=la%ps;
+	index=la/ps;
+	req=(pt[index])*ps+offset;
+	printf("Logical address %d to find the physical address : %d\n",la,req);
+}
