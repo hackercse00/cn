@@ -1,0 +1,74 @@
+#include<stdio.h>
+struct rr{
+	int pid,at,bt,st,ft,tat,wt;
+};
+void main(){
+	int i,j,k,n,temp,tq;
+	float avgwt=0,avgtat=0,sum=0,min;
+	printf("Enter the number of process :");
+	scanf("%d",&n);
+	struct rr p[n];
+	float a[n],b[n],count=n;
+	printf("Enter the time quantum : ");
+	scanf("%d",&tq);
+	for(i=0;i<n;i++){
+		printf("Enter the process id :");
+		scanf("%d",&p[i].pid);
+		printf("\tEnter the arrival time :");
+		scanf("%d",&p[i].at);
+		printf("\tEnter the burst time :");
+		scanf("%d",&p[i].bt);
+	}
+	for(i=0;i<n;i++){
+            a[i]=p[i].at;
+            b[i]=p[i].bt;
+            p[i].st=-1;
+            p[i].wt=0;
+            p[i].tat=0;
+            p[i].ft=p[i].at;
+    }
+    while(count>0){
+    	min=9999;
+    	temp=0;
+    	for(i=0;i<n;i++){
+    		if(a[i]<=sum+0.1 && b[i]>0 && min>a[i]){
+    			min=a[i];
+    			temp=1;
+    			k=i;
+			}
+		}
+		if(temp!=1){
+			sum++;
+			continue;
+		}
+		if(p[k].st==-1){
+                p[k].st=sum;
+            }
+		if(b[k]<=tq && b[k]>0){
+			p[k].wt=p[k].wt+sum-p[k].ft;
+			p[k].tat=p[k].tat+sum+b[k]-p[k].ft;
+			sum=sum+b[k];
+			count--;
+		    b[k]=0;
+		    p[k].ft=sum;
+		}
+		else if(b[k]>0){
+			b[k]=b[k]-tq;
+			p[k].wt=p[k].wt+sum-p[k].ft;
+			p[k].tat=p[k].tat+sum+tq-p[k].ft;
+			sum=sum+tq;
+			p[k].ft=sum;
+			a[k]=sum+0.1;
+		}
+	}
+	printf("Process\tat\tbt\tst\tft\twt\ttat\n");
+        for(i=0;i<n;i++){
+                avgwt+=p[i].wt;
+                avgtat+=p[i].tat;
+                printf("p%d\t%d\t%d\t%d\t%d\t%d\t%d\n",i,p[i].at,p[i].bt,p[i].st,p[i].ft,p[i].wt,p[i].tat);
+        }
+        printf("The avg wt is = %0.2f\n",avgwt/n);
+        printf("The avg tat is = %0.2f\n",avgtat/n);
+    }
+
+    
