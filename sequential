@@ -1,0 +1,110 @@
+//Sequential
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct str{
+        char name[20];
+        int len,alloc,st;
+};
+void insert();
+void delete();
+void traverse();
+int search();
+struct str f[100];
+int b[100],count,n;
+void main(){
+        int i,j,c;
+        printf("Enter the number of blocks : ");
+        scanf("%d",&n);
+        f[n];
+        b[n];
+        for(i=0;i<n;i++){
+                b[i]=-1;
+        }
+        printf("1.INSERT\n2.DELETE\n3.TRAVERSE\n");
+        while(1){
+        	    printf("Choose a option : ");
+                scanf("%d",&c);
+                switch(c){
+                        case 1:
+                                insert();
+                                break;
+                        case 2:
+                                delete();
+                                break;
+                        case 3:
+                                traverse();
+                                break;
+                        case 0:
+                                return;
+                        default:
+                                printf("Select a valid option\n");
+                                break;
+                }
+        }
+}
+void insert(){
+        int i,j,flag=0;
+        printf("Enter the file name : ");
+        scanf("%s",f[count].name);
+        if(search()==1){
+                printf("File name already exists\n");
+                return;
+        }
+        printf("Enter the length of the file : ");
+        scanf("%d",&f[count].len);
+        for(i=0;i<n;i++){
+                if(b[i]==-1){
+                        flag++;
+                        if(flag==f[count].len){
+                                for(j=i;j>i-f[count].len;j--){
+                                    b[j]=1;
+                                }
+                                f[count].alloc=1;
+                                f[count++].st=++j;
+                                printf("File inserted\n");
+                                return;
+                        }
+                }
+                else{
+                        flag=0;
+                }
+        }
+        printf("Insufficient storage for the file\n");
+}
+void delete(){
+	char c[20];
+	int i,j;
+	printf("Enter the name of the file to delete : ");
+	scanf("%s",&c);
+	for(i=0;i<count;i++){
+		if(strcmp(c,f[i].name)==0){
+			for(j=f[i].st;j<f[i].st+f[i].len;j++){
+				b[j]=-1;
+			}
+			f[i].alloc=0;
+			printf("File deleted succesfully\n");
+			return;
+		}
+    }
+	printf("File is not found\n");
+    }
+
+void traverse(){
+	int i;
+	printf("Filename\tStartIndex\tLength\n");
+	for(i=0;i<count;i++){
+		if(f[i].alloc==1){
+			printf("%s\t\t%d\t\t%d\n",f[i].name,f[i].st,f[i].len);
+		}
+	}
+}
+int search(){
+	int i;
+	for(i=0;i<n;i++){
+		if(f[count].name==f[i].name && count!=i){
+			return 1;
+		}
+	}
+	return 0;
+}
