@@ -1,0 +1,56 @@
+#include<stdio.h>
+int r[200];
+void div(int r[],int n){
+int crc12[13]={1,1,0,0,0,0,0,0,0,1,1,1,1},x=0,i;
+while(n!=x){
+for(i=0;i<13;i++){
+r[i+x]=r[i+x]^crc12[i];
+}
+for(i=0;x!=n;i++){
+if(r[x]==0)
+x++;
+else
+break;
+}
+}
+}
+void main()
+{
+int flag=0,rc[200],sc[200],i,n;
+printf("enter no. of bits: ");
+scanf("%d",&n);
+printf("enter bits :\n");
+for(i=0;i<n+12;i++){
+if(i>=n)
+sc[i]=r[i]=0;
+else{
+scanf("%d",&sc[i]);
+r[i]=sc[i];
+}
+}
+
+printf("\n");
+div(r,n);
+for(i=n;i<=n+12;i++){
+sc[i]=r[i];
+}
+printf("transmitted bits\n");
+for(i=0;i<n+12;i++){
+printf("%d ",sc[i]);
+}
+
+printf("\nenter reciever code:\n");
+for(i=0;i<n+12;i++){
+scanf("%d",&rc[i]);
+r[i]=rc[i];
+}
+div(r,n);
+for(i=n-1;i<n+12;i++){
+if(r[i]==1)
+flag=1;
+}
+if(flag==1)
+printf("\nerror detected");
+else
+printf("\nbits transmitted without any errors;\n");
+}
