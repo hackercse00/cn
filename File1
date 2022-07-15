@@ -1,0 +1,71 @@
+oddcount<-function(x){
+  sum=0
+  for(i in x){
+    if(i%%2==1){
+      sum<-sum+1
+    }
+  }
+  return(sum)
+}
+oddcount(1:100)
+d<-c(1:100)
+oddcount(d)
+
+
+r<-letters[1:9]
+m<-matrix(d,nrow=5,ncol=4,byrow=TRUE,dimnames(r))
+m
+n<-matrix(d,nrow=5,ncol=4)
+d<-rbind(m,n)
+
+
+
+marks<-c(34,36,36,38,38,39,39,40,40,41,41,41,41,42,42,45,49,56)
+mean(marks)
+median(marks)
+var(marks)
+sd(marks)
+
+data(airquality)
+summary(airquality)
+str(airquality)
+hist(airquality$Ozone,xlab="HISTOGRAM",ylab="OZONE",col="blue",border="red",main="HISTOGRAM",notch=TRUE)
+boxplot(airquality$Wind,xlab="HISTOGRAM",ylab="OZONE",col="blue",border="red",main="HISTOGRAM",notch=TRUE)
+
+iris
+summary(iris)
+str(iris)
+nrow(iris)
+ncol(iris)
+iris$Sepal.Width[50]
+iris$Petal.Length
+t=iris$Petal.Length
+table(t)
+cumsum(t)
+prop.table(t)
+mean(iris$Sepal.Length)
+median(iris$Petal.Length)
+var(iris$Sepal.Width)
+sd(iris$Petal.Width)
+range(iris$Sepal.Length)
+sum(iris$Petal.Length)
+max(iris$Petal.Length)
+min(iris$Petal.Length)
+quantile(iris$Sepal.Length,0.25)
+quantile(iris$Sepal.Length,0.75)
+
+b<-matrix((data =c(2,5,6,3,4,5,nrow=2,ncol=3)))
+b
+t(b)
+b*2
+print(inv(m))
+
+CO2
+summary(CO2)
+str(CO2)
+mean(CO2$conc)
+median(CO2$uptake)
+
+
+mean(rchisq(1000,2))
+qchisq(0.95,2)
